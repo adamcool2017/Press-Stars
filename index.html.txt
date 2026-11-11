@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRESS STARS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <div class="top-line">
+      <span class="tag">ARCADE MEMORY GAME</span>
+      <span class="tag">⭐ PRESS STARS</span>
+    </div>
+
+    <h1>PRESS <span>STARS</span></h1>
+    <p class="subtitle">Remember the colours. Repeat the sequence.</p>
+
+    <section class="stats">
+      <div class="stat">
+        <span>LEVEL</span>
+        <strong id="level">0</strong>
+      </div>
+      <div class="stat">
+        <span>HIGH SCORE</span>
+        <strong id="high-score">0</strong>
+      </div>
+    </section>
+
+    <p id="message" aria-live="polite">Press START GAME to begin!</p>
+
+    <div class="button-grid">
+      <button class="pad green" data-color="green" aria-label="Green"></button>
+      <button class="pad red" data-color="red" aria-label="Red"></button>
+      <button class="pad blue" data-color="blue" aria-label="Blue"></button>
+      <button class="pad yellow" data-color="yellow" aria-label="Yellow"></button>
+    </div>
+
+    <button id="start-button" class="start-button">START GAME</button>
+    <p class="hint">Watch the sequence, then repeat it!</p>
+  </main>
+
+  <footer>PRESS STARS • MEMORY ARCADE</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
