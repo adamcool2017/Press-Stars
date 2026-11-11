@@ -6,6 +6,7 @@ const highScoreDisplay = document.querySelector("#high-score");
 const message = document.querySelector("#message");
 
 const colours = ["green", "red", "blue", "yellow"];
+const MAX_LEVEL = 15;
 
 let sequence = [];
 let playerSequence = [];
@@ -46,10 +47,19 @@ async function playSequence() {
 
   playerSequence = [];
   acceptingInput = true;
+
   message.textContent = "YOUR TURN! REPEAT IT!";
 }
 
-async function startGame() {
+function updateHighScore() {
+  if (level > highScore) {
+    highScore = level;
+    localStorage.setItem("pressStarsHighScore", highScore);
+    highScoreDisplay.textContent = highScore;
+  }
+}
+
+function startGame() {
   sequence = [];
   playerSequence = [];
   level = 0;
@@ -64,10 +74,18 @@ async function startGame() {
 }
 
 async function nextRound() {
+  if (level >= MAX_LEVEL) {
+    winGame();
+    return;
+  }
+
   level++;
   levelDisplay.textContent = level;
 
-  const nextColour = colours[Math.floor(Math.random() * colours.length)];
+  const nextColour = colours[
+    Math.floor(Math.random() * colours.length)
+  ];
+
   sequence.push(nextColour);
 
   await playSequence();
@@ -77,7 +95,9 @@ async function pressColour(colour) {
   if (!acceptingInput || !gameRunning) return;
 
   acceptingInput = false;
+
   await flashPad(colour, 180);
+
   playerSequence.push(colour);
 
   const currentIndex = playerSequence.length - 1;
@@ -88,8 +108,13 @@ async function pressColour(colour) {
   }
 
   if (playerSequence.length === sequence.length) {
+    if (level === MAX_LEVEL) {
+      winGame();
+      return;
+    }
+
     message.textContent = "CORRECT! NEXT LEVEL!";
-    acceptingInput = false;
+
     await wait(700);
     nextRound();
   } else {
@@ -101,14 +126,21 @@ function endGame() {
   gameRunning = false;
   acceptingInput = false;
 
-  if (level > highScore) {
-    highScore = level;
-    localStorage.setItem("pressStarsHighScore", highScore);
-    highScoreDisplay.textContent = highScore;
-    message.textContent = `NEW HIGH SCORE! YOU REACHED LEVEL ${level}!`;
-  } else {
-    message.textContent = `GAME OVER! YOU REACHED LEVEL ${level}.`;
-  }
+  updateHighScore();
+
+  message.textContent = `GAME OVER! YOU REACHED LEVEL ${level}.`;
+
+  startButton.disabled = false;
+  startButton.textContent = "PLAY AGAIN";
+}
+
+function winGame() {
+  gameRunning = false;
+  acceptingInput = false;
+
+  updateHighScore();
+
+  message.textContent = "🏆 YOU BEAT PRESS STARS! ALL 15 LEVELS COMPLETED!";
 
   startButton.disabled = false;
   startButton.textContent = "PLAY AGAIN";
