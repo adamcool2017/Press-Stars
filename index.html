@@ -4,32 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>PRESS STARS</title>
+
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Browser tab icon -->
+  <link rel="icon" type="image/png" href="press-stars-logo.png">
 </head>
+
 <body>
   <main class="game">
 
+    <!-- PRESS STARS LOGO -->
     <img
       src="press-stars-logo.png"
-      alt="PRESS STARS arcade game logo"
+      alt="PRESS STARS logo"
       class="brand-logo"
     >
 
-    <p class="subtitle">Remember the colours. Repeat the sequence.</p>
+    <p class="subtitle">
+      Remember the colours. Repeat the sequence.
+    </p>
 
     <section class="stats">
       <div class="stat">
         <span>LEVEL</span>
         <strong id="level">0</strong>
       </div>
+
       <div class="stat">
         <span>HIGH SCORE</span>
         <strong id="high-score">0</strong>
       </div>
     </section>
 
-    <p id="message" aria-live="polite">Press START GAME to begin!</p>
+    <p id="message" aria-live="polite">
+      Press START GAME to begin!
+    </p>
 
     <div class="button-grid">
       <button class="pad green" data-color="green" aria-label="Green"></button>
@@ -38,7 +50,10 @@
       <button class="pad yellow" data-color="yellow" aria-label="Yellow"></button>
     </div>
 
-    <button id="start-button" class="start-button">START GAME</button>
+    <button id="start-button" class="start-button">
+      START GAME
+    </button>
+
     <p class="hint">Watch the sequence, then repeat it!</p>
 
   </main>
@@ -48,3 +63,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+v
